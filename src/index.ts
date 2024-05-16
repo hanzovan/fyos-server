@@ -11,7 +11,14 @@ dotenv.config();
 const app: Application = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors({ origin: true }))
+// Add for client site rendering
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
