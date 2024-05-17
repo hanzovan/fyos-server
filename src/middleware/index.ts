@@ -3,7 +3,15 @@ import { decryptString, verifyJwtToken } from "../utils";
 
 export const authenticateUser = async (req: any, res: Response, next: NextFunction) => {
     try {
-        console.log("\nnode-server > middleware > authenticateUser")
+        // check if request is for public posts
+        const isPublicPostRequest = req.method === 'GET' && req.path === '/posts' && req.query.type === 'public';
+
+        if (isPublicPostRequest) {
+            console.log("node-server > middleware > authenticateUser > public post request allowed");
+            return next();
+        }
+        console.log(`middleware > method: ${req.method}, path: ${req.path}, query type: ${req.query.type}, result of isPublicPostRequest: ${isPublicPostRequest}`);
+        
         const authorization = req.headers["authorization"];
         if (!authorization) {
             return res.status(401).send("You are not authenticated, please login to continue");
@@ -37,7 +45,7 @@ export const authenticateUser = async (req: any, res: Response, next: NextFuncti
         }
         req.user = decrypted
         console.log("\nnode-server > middleware > authenticateUser > decrypted successfully, about to return next()")
-        return next()
+        return next();
     } catch (error) {
         console.log("node-server > middleware > authenticateUser error:", error)
         return res.status(500).send("Sorry, something went wrong. Please try again later")
