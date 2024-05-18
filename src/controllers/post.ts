@@ -7,6 +7,15 @@ export const getPostsController = async (req: Request, res: Response, next: Next
     return res.status(result.status).json(result.data)
 }
 
-const PostController = { getPostsController }
+export const getSinglePostController = async (req: Request, res: Response, next: NextFunction) => {
+    const { slug } = req.params;
+    const result = await PostService.getSinglePost(slug);
+    if (result.isError) {
+        return res.status(result.status).send(result.message);
+    }
+    return res.status(result.status).json(result.data);
+}
+
+const PostController = { getPostsController, getSinglePostController }
 
 export { PostController };

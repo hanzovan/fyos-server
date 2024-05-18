@@ -4,7 +4,7 @@ import { decryptString, verifyJwtToken } from "../utils";
 export const authenticateUser = async (req: any, res: Response, next: NextFunction) => {
     try {
         // check if request is for public posts
-        const isPublicPostRequest = req.method === 'GET' && req.path === '/posts' && req.query.type === 'public';
+        const isPublicPostRequest = req.method === 'GET' && (req.path === '/posts' || req.path.startsWith('/posts')) && req.query.type === 'public';
 
         if (isPublicPostRequest) {
             console.log("node-server > middleware > authenticateUser > public post request allowed");
