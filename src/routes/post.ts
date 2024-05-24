@@ -9,6 +9,6 @@ postRouter.get("/posts", authenticateUser, async (req, res, next) => {
     await PostController.getPostsController(req, res, next);
 });
 
-postRouter.get("/posts/:slug", authenticateUser, getSinglePostController)
+postRouter.get("/posts/:id", authenticateUser, getSinglePostController)
 
 export { postRouter };

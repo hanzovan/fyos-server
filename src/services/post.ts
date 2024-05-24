@@ -2,7 +2,6 @@ import { PostModel, UserModel } from "../models";
 
 const getAllPosts = async () => {
     try {
-        console.log("node-server > services > post > getAllPosts function")
         const result = await PostModel.find({})
           .populate({ path: "user", select: ["name", "email", "avatar", "_id"], model: UserModel })
           .lean()
@@ -18,9 +17,9 @@ const getAllPosts = async () => {
       }
 }
 
-const getSinglePost = async (slug: string) => {
+const getSinglePost = async (id: string) => {
   try {
-    const post = await PostModel.findOne({ slug })
+    const post = await PostModel.findById(id)
       .populate({ path: "user", select: ["name", "email", "avatar", "_id"], model: UserModel })
       .lean()
       .exec();
