@@ -1,4 +1,4 @@
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response, Application, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import cors from "cors";
 import compression from 'compression';
@@ -36,6 +36,11 @@ connectDb();
 app.get('/', (req: Request, res: Response) => {
     res.send('Welcome to fyos server');
 });
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) =>  {
+    console.error('Error: ', err.stack);
+    res.status(500).send({ error: 'Something went wrong!', message: err.message })
+})
 
 app.listen(port, () => {
     console.log(`Server is Fire at http://localhost:${port}`);
