@@ -15,8 +15,9 @@ const port = process.env.PORT || 5001;
 const corsOptions = {
     origin: [
         'http://localhost:3000',
-        'https://fyos.vercel.app',
-        'https://fyos.org'
+        'https://fyos.vercel.app',//vercel deployment
+        'https://fyos.org',//domain name registra by porkbun
+        'https://fyos-server-c59796a2f131.herokuapp.com'// Heroku deployment
     ],
     credentials: true,
     optionsSuccessStatus: 200
