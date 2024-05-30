@@ -13,7 +13,11 @@ const port = process.env.PORT || 5001;
 
 // Add for client site rendering
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: [
+        'http://localhost:3000',
+        'https://fyos.vercel.app',
+        'https://fyos.org'
+    ],
     credentials: true,
     optionsSuccessStatus: 200
 }
