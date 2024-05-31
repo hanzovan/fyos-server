@@ -17,7 +17,7 @@ const corsOptions = {
         'http://localhost:3000',
         'https://fyos.vercel.app',//vercel deployment
         'https://fyos.org',//domain name registra by porkbun
-        'https://fyos-server-c59796a2f131.herokuapp.com'// Heroku deployment
+        'https://api.fyos.org'// Heroku deployment
     ],
     credentials: true,
     optionsSuccessStatus: 200
