@@ -17,9 +17,9 @@ const getAllPosts = async () => {
       }
 }
 
-const getSinglePost = async (id: string) => {
+const getSinglePost = async (slug: string) => {
   try {
-    const post = await PostModel.findById(id)
+    const post = await PostModel.findOne({ slug })
       .populate({ path: "user", select: ["name", "email", "avatar", "_id"], model: UserModel })
       .lean()
       .exec();
